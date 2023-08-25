@@ -4,6 +4,8 @@ import shutil
 import csv_files
 import os
 
+arquivos = csv_files.lista_caminho_dos_csv()
+
 # Função para analisar o encoding atual de um arquivo CSV
 def analisar_encoding(arquivo):
     resultado = chardet.detect(open(arquivo, 'rb').read())
@@ -33,25 +35,24 @@ def conversao_necessaria_para_lista(arquivos):
     return arquivos_necessarios, arquivos_em_utf8
 # Exemplo de uso:
 
-def conversor(arquivos):
-    arquivos_para_converter, arquivos_em_utf8 = conversao_necessaria_para_lista(arquivos)
+arquivos_para_converter, arquivos_em_utf8 = conversao_necessaria_para_lista(arquivos)
 
-    if not arquivos_para_converter and arquivos_em_utf8:
-        print("Todos os arquivos já estão em UTF-8, a conversão não é necessária.")
-    else:
-        if arquivos_em_utf8:
-            # print("Os seguintes arquivos já estão em UTF-8:")
-            for arquivo in arquivos_em_utf8:
-                nome_arquivo = os.path.basename(arquivo)
-                print(f"\nArquivo: {nome_arquivo}")
-                print("Enconding anterior: utf-8")
-                print("Não necessária a condificação")
+if not arquivos_para_converter and arquivos_em_utf8:
+    print("Todos os arquivos já estão em UTF-8, a conversão não é necessária.")
+else:
+    if arquivos_em_utf8:
+        # print("Os seguintes arquivos já estão em UTF-8:")
+        for arquivo in arquivos_em_utf8:
+            nome_arquivo = os.path.basename(arquivo)
+            print(f"\nArquivo: {nome_arquivo}")
+            print("Enconding anterior: utf-8")
+            print("Não necessária a condificação")
 
-        if arquivos_para_converter:
-            for arquivo, encoding_anterior in arquivos_para_converter:
-                nome_arquivo = os.path.basename(arquivo)
-                print(f"\nArquivo: {nome_arquivo}")
-                print(f"Encoding anterior: {encoding_anterior}")
-                print("Encoding após a conversão: utf-8")
-                # Chame a função converter_para_utf8 para fazer a conversão
-                converter_para_utf8(arquivo, encoding_anterior)
+    if arquivos_para_converter:
+        for arquivo, encoding_anterior in arquivos_para_converter:
+            nome_arquivo = os.path.basename(arquivo)
+            print(f"\nArquivo: {nome_arquivo}")
+            print(f"Encoding anterior: {encoding_anterior}")
+            print("Encoding após a conversão: utf-8")
+            # Chame a função converter_para_utf8 para fazer a conversão
+            converter_para_utf8(arquivo, encoding_anterior)
