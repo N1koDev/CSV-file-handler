@@ -1,57 +1,29 @@
 import os
 import time
 
-def criar_pasta_csv():
-    if os.path.exists('csv_files'):
-        print("A pasta 'csv_files' já existe.")
+def verificar_ou_criar_pasta_csv():
+    # Obtém o caminho completo para a pasta 'Documents' no diretório padrão do usuário
+    documents_path = os.path.expanduser('~/Documents')
+
+    # Concatena o caminho completo com o nome da pasta 'csv_files'
+    csv_files_path = os.path.join(documents_path, 'csv_files')
+
+    if os.path.exists(csv_files_path):
+        print(f"A pasta '{csv_files_path}' já existe.")
     else:
-        os.makedirs('csv_files')
-        print("A pasta 'csv_files' foi criada.")
+        os.makedirs(csv_files_path)
+        print(f"A pasta '{csv_files_path}' foi criada.")
 
-    
+    # Verifica se a pasta 'csv_files' existe
+    if os.path.exists(csv_files_path):
+        # Lista todos os arquivos na pasta 'csv_files'
+        arquivos = os.listdir(csv_files_path)
 
-def listar_arquivos_csv():
-    return [file for file in os.listdir('csv_files') if file.endswith('.csv')]
-
-def esperar_arquivos_csv(tempo_maximo_espera=20):
-    tempo_inicio = time.time()
-
-    print("Aguardando inclusão de arquivo csv...")
-
-    while True:
-        arquivos_csv = listar_arquivos_csv()
-        if arquivos_csv:
-            return arquivos_csv
-        
-        tempo_atual = time.time()
-        tempo_passado = tempo_atual - tempo_inicio
-        
-        if tempo_passado >= tempo_maximo_espera:
-            print("Tempo limite de espera excedido. Nenhum arquivo CSV encontrado.")
-            return []
-
-        time.sleep(1)  # Espera por 1 segundo antes de verificar novamente
-
-
-def interagir_com_usuario(arquivos_csv):
-    if not arquivos_csv:
-        print("Coloque os arquivos .csv na pasta csv_files...")
-    else:
-        print(f"A pasta 'csv_files' contém os seguintes arquivos CSV: {', '.join(arquivos_csv)}")
-
-        resposta = input("Deseja converter esses arquivos CSV para um formato X fictício? (S/N): ").strip().lower()
-
-        if resposta == 's':
-            converter_para_formato_x(arquivos_csv)
-        elif resposta == 'n':
-            print("Nenhum arquivo foi convertido.")
+        if not arquivos:
+            print(f"A pasta '{csv_files_path}' está vazia.")
         else:
-            print("Resposta inválida. Use 'S' para sim ou 'N' para não.")
+            print(f"Arquivos em '{csv_files_path}':")
+            for arquivo in arquivos:
+                print(arquivo)
 
-def main():
-    criar_pasta_csv()
-    arquivos_csv = esperar_arquivos_csv()
-    interagir_com_usuario(arquivos_csv)
-
-if __name__ == "__main__":
-    main()
+verificar_ou_criar_pasta_csv()
