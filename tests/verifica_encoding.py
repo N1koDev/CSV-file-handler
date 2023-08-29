@@ -1,9 +1,11 @@
+import glob
 import os
 import chardet
 
-import csv_files
+# Obtém o caminho completo para a pasta 'Documents' no diretório padrão do usuário
+documents_path = os.path.expanduser('examples/converter_to_utf8/input')
 
-arquivos = csv_files.lista_caminho_dos_csv()
+arquivos = glob.glob(os.path.join(documents_path, '*.csv'))
 
 # Função para verificar o encoding de um arquivo
 def detect_file_encoding(file_path):

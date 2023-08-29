@@ -1,3 +1,4 @@
+import glob
 import os
 import time
 
@@ -7,8 +8,9 @@ documents_path = os.path.expanduser('~/Documents')
 # Concatena o caminho completo com o nome da pasta 'csv_files'
 csv_files_path = os.path.join(documents_path, 'csv_files')
 
-# LIsta os arquivos na pasta 'csv_files'
-arquivos_csv = os.listdir(csv_files_path)
+# # LIsta os arquivos na pasta 'csv_files'
+# arquivos_csv = os.listdir(csv_files_path)
+
 
 
 
@@ -29,6 +31,9 @@ def create_csv_files():
               
 
 def listar_arquivos_csv():
+    # LIsta apenas arquivos .csv na pasta 'csv_files'
+    global arquivos_csv
+    arquivo_csv = glob.glob(os.path.join(csv_files_path, '*.csv'))
     
     if not arquivos_csv:
         print("A pasta 'csv_files' está vazia")
@@ -39,6 +44,7 @@ def listar_arquivos_csv():
             print(f"{i}. {arquivo}")
             total = i
         print(f"Total de {total} arquivos")
+        print("\nO que deseja fazer com os arquivos acima?")
         return True
 
 # Junta o nome dos arquivos o com o diretório
