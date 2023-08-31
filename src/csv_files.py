@@ -1,6 +1,5 @@
 import glob
 import os
-import time
 
 # Obtém o caminho completo para a pasta 'Documents' no diretório padrão do usuário
 documents_path = os.path.expanduser('~/Documents')
@@ -56,7 +55,9 @@ def listar_arquivos_csv():
         print("\nO que deseja fazer com os arquivos acima?")
         return True
 
-# Junta o nome dos arquivos o com o diretório
-def lista_caminho_dos_csv():
-    caminhos_arquivos = [os.path.join(csv_files_path, arquivo) for arquivo in arquivos_csv]
-    return caminhos_arquivos
+# # Junta o nome dos arquivos o com o diretório
+# def lista_caminho_dos_csv():
+#     caminhos_arquivos = [os.path.join(csv_files_path, arquivo) for arquivo in arquivos_csv]
+#     return caminhos_arquivos
+
+print(arquivos_csv)

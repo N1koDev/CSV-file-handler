@@ -9,10 +9,12 @@ output_folder = csv_files.output_folder
 
 arquivos_csv = csv_files.arquivos_csv
 
+arquivos = csv_files.listar_arquivos_csv()
+
+
 def menu():
     while True:
-        arquivos = csv_files.lista_caminho_dos_csv()
-        csv_files.listar_arquivos_csv()
+        print(arquivos)
 
         print("[ 1 ] Converter codificação de caracteres (encoding) para UTF-8")
         print("[ 2 ] Unificar arquivos (limit 999999 linhas por arquivo)")
@@ -24,7 +26,7 @@ def menu():
         escolha = input("Escolha uma opção: ")
         
         if escolha == '1':
-            convert_to_utf8.conversor(arquivos)
+            convert_to_utf8.convert_to_utf8(arquivos_csv)
         elif escolha == '2':
             unify_csv_files.unificar_csv(input_folder, output_folder, arquivos_csv)
         elif escolha == '3':
