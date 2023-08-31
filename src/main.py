@@ -1,5 +1,13 @@
 import csv_files
-import menu
+import convert_to_utf8
+import unify_csv_files
+import standardize_dates
+import replace_delimiters
+
+input_folder = csv_files.input_folder
+output_folder = csv_files.output_folder
+
+arquivos_csv = csv_files.arquivos_csv
 
 def menu():
     while True:
@@ -18,7 +26,7 @@ def menu():
         if escolha == '1':
             convert_to_utf8.conversor(arquivos)
         elif escolha == '2':
-            print("Em andamento")
+            unify_csv_files.unificar_csv(input_folder, output_folder, arquivos_csv)
         elif escolha == '3':
             print("Em andamento")
         elif escolha == '4':
@@ -34,4 +42,4 @@ def menu():
             print("Saindo do programa.")
             break
 
-
+menu()

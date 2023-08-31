@@ -1,13 +1,21 @@
-import csv_files
+import os
 import pandas as pd
+import csv_files
 
-# Inicializa um DataFrame vazio para armazenar os dados
-dados_unificados = pd.DataFrame()
+def unificar_csv(input_folder, output_folder, arquivos_csv):
+    # Verifica se a pasta de saída existe, se não, cria-a
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+    
+    # Inicializa um DataFrame vazio
+    combined_df = pd.DataFrame()
 
-for arquivo in csv_files.arquivos_csvrquivos:
-    df = pd.read_csv(arquivo)
-    dados_unificados = pd.concat([dados_unificados, df], ignore_index=True)
+    for csv_file in arquivos_csv:
+        # Lê cada arquivo CSV em um DataFrame
+        df = pd.read_csv(csv_file)
+        # Concatena o DataFrame lido com o DataFrame combinado
+        combined_df = pd.concat([combined_df, df], ignore_index=True)
 
-    # Salva o DataFrame unificado em um novo arquivo CSV
-    dados_unificados.to_csv(os.path.join(diretorio, arquivo_saida), index=False)
-    print(f'Arquivos CSV unificados e salvos em {os.path.join(diretorio, arquivo_saida)}')
+    # Salva o DataFrame combinado como um arquivo CSV na pasta de saída
+    combined_df.to_csv(os.path.join(output_folder, 'combined.csv'), index=False)
+    print("Arquivos CSV foram unificados com sucesso.")

@@ -1,7 +1,6 @@
 import chardet
 import codecs
 import shutil
-import csv_files
 import os
 
 # Função para analisar o encoding atual de um arquivo CSV
@@ -33,7 +32,7 @@ def conversao_necessaria_para_lista(arquivos):
     return arquivos_necessarios, arquivos_em_utf8
 # Exemplo de uso:
 
-def conversor(arquivos):
+def convert_to_utf8(arquivos):
     arquivos_para_converter, arquivos_em_utf8 = conversao_necessaria_para_lista(arquivos)
 
     if not arquivos_para_converter and arquivos_em_utf8:
