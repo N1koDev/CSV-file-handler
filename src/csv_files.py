@@ -16,6 +16,7 @@ output_folder = os.path.join(csv_files_path, 'output')
 # LIsta apenas arquivos .csv na pasta 'csv_files'
 arquivos_csv = glob.glob(os.path.join(input_folder, '*.csv'))
 
+
 def create_folders():
     try:
         # Verifica se a pasta 'csv_files' existe
@@ -54,10 +55,27 @@ def listar_arquivos_csv():
         print(f"Total de {total} arquivos")
         print("\nO que deseja fazer com os arquivos acima?")
         return True
+    
+def detectar_delimitador(arquivo_csv):
+    # Tenta detectar automaticamente o delimitador olhando para as primeiras 2 linhas do arquivo.
+    with open(arquivo_csv, 'r') as file:
+        primeira_linha = file.readline()
+        segunda_linha = file.readline()
+    
+    if ';' in primeira_linha:
+        return ';'
+    elif ',' in primeira_linha:
+        return ','
+    elif ';' in segunda_linha:
+        return ';'
+    elif ',' in segunda_linha:
+        return ','
+    else:
+        # Se não foi possível detectar automaticamente, você pode especificar o delimitador manualmente.
+        return ','  # Substitua pelo delimitador correto se necessário.
 
 # # Junta o nome dos arquivos o com o diretório
 # def lista_caminho_dos_csv():
 #     caminhos_arquivos = [os.path.join(csv_files_path, arquivo) for arquivo in arquivos_csv]
 #     return caminhos_arquivos
 
-print(arquivos_csv)

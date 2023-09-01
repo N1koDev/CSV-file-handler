@@ -54,3 +54,5 @@ def convert_to_utf8(arquivos):
                 print("Encoding após a conversão: utf-8")
                 # Chame a função converter_para_utf8 para fazer a conversão
                 converter_para_utf8(arquivo, encoding_anterior)
+
+
