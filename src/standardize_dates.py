@@ -50,13 +50,12 @@ for arquivo_csv in arquivos_csv:
     else:
         # Formata a coluna de data de acordo com o formato detectado
         df[coluna_data] = pd.to_datetime(df[coluna_data], errors='coerce')
-        df[coluna_data] = df[coluna_data].dt.strftime('%Y-%m-%d %H:%M:%S') if ' ' in df[coluna_data].astype(str).iloc[0] else df[coluna_data].dt.strftime('%Y-%m-%d')
 
         # Verifica se a coluna de data contém informações de hora
         if ' ' in df[coluna_data].astype(str).iloc[0]:
             # Se sim, cria novas colunas para data e hora separadas
-            df.insert(0, 'Data', df[coluna_data].str.split(pat=' ', n=1, expand=True)[0])
-            df.insert(1, 'Hora', df[coluna_data].str.split(pat=' ', n=1, expand=True)[1])
+            df.insert(0, 'Data', df[coluna_data].dt.strftime('%Y-%m-%d'))
+            df.insert(1, 'Hora', df[coluna_data].dt.strftime('%H:%M:%S'))
             df.drop(columns=[coluna_data], inplace=True)
         else:
             df.rename(columns={coluna_data: 'Data'}, inplace=True)
