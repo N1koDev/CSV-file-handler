@@ -2,21 +2,19 @@ import csv_files
 import convert_to_utf8
 import unify_csv_files
 import standardize_dates
-import replace_delimiters
 
 input_folder = csv_files.input_folder
 output_folder = csv_files.output_folder
-
 arquivos_csv = csv_files.arquivos_csv
 
-arquivos = csv_files.listar_arquivos_csv()
-
-
 def menu():
+    csv_files.create_folders()
     while True:
-        print(arquivos)
-
-        print("[ 1 ] Converter codificação de caracteres (encoding) para UTF-8")
+        print("Arquivos disponíveis:")
+        for idx, arquivo in enumerate(arquivos_csv):
+            print(f"{idx + 1}. {arquivo}")
+        
+        print("\n[ 1 ] Converter codificação de caracteres (encoding) para UTF-8")
         print("[ 2 ] Unificar arquivos (limit 999999 linhas por arquivo)")
         print("[ 3 ] Substituir vírgula ',' por ponto e vírgula ';'")
         print("[ 4 ] Substituir ponto e vírgula ';' por vírgula ','")
@@ -28,11 +26,15 @@ def menu():
         if escolha == '1':
             convert_to_utf8.convert_to_utf8(arquivos_csv)
         elif escolha == '2':
-            unify_csv_files.unificar_csv(input_folder, output_folder, arquivos_csv)
+            unify_csv_files.unify_csv_files(input_folder, output_folder, arquivos_csv)
         elif escolha == '3':
-            print("Em andamento")
+            # Implemente a lógica para substituir vírgula por ponto e vírgula
+            pass
         elif escolha == '4':
-            print("Em andamento")
+            # Implemente a lógica para substituir ponto e vírgula por vírgula
+            pass
+        elif escolha == '5':
+            standardize_dates.standardize_dates(arquivos_csv)
         elif escolha == '0':
             print("Saindo do programa.")
             break
