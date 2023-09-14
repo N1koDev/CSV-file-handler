@@ -4,8 +4,6 @@ import csv_files
 from dateutil import parser
 from dateutil.parser import ParserError
 
-
-
 def infer_date_format(date_str):
     try:
         parser.parse(date_str)

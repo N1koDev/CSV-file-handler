@@ -103,6 +103,7 @@ def unify_csv_files (input_folder, output_folder, arquivos_csv):
                 delimitador = csv_files.detectar_delimitador(arquivo_csv)
                 df = pd.read_csv(arquivo_csv, low_memory=False, delimiter=delimitador, encoding=encoding)
                 dataframes.append(df)
+                # total_linhas += len(df)  # Atualiza o total de linhas
             except Exception as e:
                 print(f"Erro ao ler o arquivo {arquivo_csv}: {e}")
         else:

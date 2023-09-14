@@ -1,4 +1,4 @@
-
+import chardet
 
 # Função para detectar o encoding correto de um arquivo CSV
 def detectar_encoding(arquivo_csv):

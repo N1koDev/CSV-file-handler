@@ -33,6 +33,27 @@ if arquivos_csv:
     # Use a função read_csv() para ler o arquivo CSV e armazenar os dados em um DataFrame
     df = pd.read_csv(caminho_arquivo, encoding=encoding, sep=sep)
 
+    # Dividir a coluna 'Data/Hora' em 'Data' e 'Hora' usando o espaço como separador
+    df[['Data', 'Hora']] = df['Data/Hora'].str.split(' ', n=1, expand=True)
+
+    # Aplicar a formatação desejada
+    df['Data'] = pd.to_datetime(df['Data'], format='%d/%m/%Y').dt.strftime('%Y-%m-%d')
+    df['Hora'] = pd.to_datetime(df['Hora']).dt.strftime('%H:%M:%S')
+
+    # Reorganizar as colunas para colocar 'Data' e 'Hora' no início
+    colunas = ['Data', 'Hora'] + [coluna for coluna in df.columns if coluna not in ['Data', 'Hora']]
+    df = df[colunas]
+
+    # Exibir o DataFrame resultante
+    print(df[['Data', 'Hora']])
+
+    # Caminho do arquivo de saída
+    output_file_path = os.path.join(output_folder, 'output.csv')
+
+    # Salvar o DataFrame em um arquivo CSV na pasta de saída
+    df.to_csv(output_file_path, index=False, encoding=encoding, sep=sep)
+
+    print(f'Dados salvos em: {output_file_path}')
 else:
     print("Nenhum arquivo CSV encontrado na pasta de entrada.")
 
