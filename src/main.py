@@ -1,5 +1,6 @@
 import csv_files
 import convert_to_utf8
+import convert_to_utf8sig
 import unify_csv_files
 import standardize_dates
 
@@ -24,7 +25,7 @@ def menu():
         escolha = input("Escolha uma opção: ")
         
         if escolha == '1':
-            convert_to_utf8.convert_to_utf8(arquivos_csv)
+            convert_to_utf8sig.convert_to_utf8_sig(arquivos_csv)
         elif escolha == '2':
             unify_csv_files.unify_csv_files(input_folder, output_folder, arquivos_csv)
         elif escolha == '3':

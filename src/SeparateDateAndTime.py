@@ -1,8 +1,7 @@
 import os
 import pandas as pd
-from dateutil.parser import parse
+from dateutil.parser import parser
 import csv_files
-import parser
 
 
 output_folder = csv_files.output_folder
@@ -23,6 +22,12 @@ if not os.path.exists(output_folder):
 
 # Loop através dos arquivos CSV
 for arquivo_csv in arquivos_csv:
+    # Detecta automaticamente o delimitador
+    delimitador = csv_files.detectar_delimitador(arquivo_csv)
+
+    # Detecta o encoding correto do arquivo CSV
+    encoding = csv_files.detectar_encoding(arquivo_csv)
+
     # Leia o arquivo CSV
     df = pd.read_csv(arquivo_csv)
 
@@ -39,4 +44,4 @@ for arquivo_csv in arquivos_csv:
 
     # Salve o arquivo CSV com o formato de Data/Hora no nome
     nome_arquivo_saida = os.path.join(output_folder, f"{formato_data_hora}_{os.path.basename(arquivo_csv)}")
-    df.to_csv(nome_arquivo_saida, index=False)
+    df.to_csv(nome_arquivo_saida, index=False, delimiter=delimitador, encoding=encoding )

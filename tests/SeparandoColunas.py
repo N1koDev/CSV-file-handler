@@ -34,7 +34,7 @@ if arquivos_csv:
     df = pd.read_csv(caminho_arquivo, encoding=encoding, sep=sep)
 
     # Dividir a coluna 'Data/Hora' em 'Data' e 'Hora' usando o espaço como separador
-    df[['Data', 'Hora']] = df['Data/Hora'].str.split(' ', n=1, expand=True)
+    df[['Data', 'Hora']] = df['Data Trans.'].str.split(' ', n=1, expand=True)
 
     # Aplicar a formatação desejada
     df['Data'] = pd.to_datetime(df['Data'], format='%d/%m/%Y').dt.strftime('%Y-%m-%d')

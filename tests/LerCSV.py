@@ -36,4 +36,4 @@ if arquivos_csv:
 else:
     print("Nenhum arquivo CSV encontrado na pasta de entrada.")
 
-print(arquivos_csv)
+print(df)
