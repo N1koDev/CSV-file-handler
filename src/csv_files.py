@@ -17,6 +17,9 @@ output_folder = os.path.join(csv_files_path, 'output')
 # LIsta apenas arquivos .csv na pasta 'csv_files'
 arquivos_csv = glob.glob(os.path.join(input_folder, '*.csv'))
 
+# LIsta apenas arquivos .csv na pasta 'csv_files'
+arquivos_xlsx = glob.glob(os.path.join(input_folder, '*.xlsx'))
+
 
 def create_folders():
     try:
