@@ -9,25 +9,31 @@ def convert_xlsx_to_csv(input_folder, output_folder):
         print("Não há arquivos XLSX na pasta de entrada.")
         return
 
+    # Escolha da codificação
+    utf_option = input("Deseja que os CSVs sejam em UTF-8 padrão ou em UTF-8-SIG? (Normal/SIG): ")
+    if utf_option.upper() == 'NORMAL' or utf_option.upper() == 'N':
+        encoding_option = 'utf-8'
+    elif utf_option.upper() == 'SIG' or utf_option.upper() == 'S':
+        encoding_option = 'utf-8-sig'
+    else:
+        print("Opção inválida. Usando UTF-8 padrão.")
+        encoding_option = 'utf-8'
+
+    # Escolha do separador
+    separator_option = input("Escolha o separador desejado (',' para vírgula, '.' para ponto, ';' para ponto e vírgula): ")
+    if separator_option == ',':
+        sep_option = ','
+    elif separator_option == '.':
+        sep_option = '.'
+    elif separator_option == ';':
+        sep_option = ';'
+    else:
+        print("Opção inválida. Usando vírgula como separador.")
+        sep_option = ','
+
     for idx, xlsx_file in enumerate(arquivos_xlsx):
         try:
             df = pd.read_excel(xlsx_file)
-
-            # Escolha da codificação
-            utf_option = input(f"Deseja que o CSV {os.path.basename(xlsx_file)} seja em UTF-8? (S/N): ")
-            encoding_option = 'utf-8' if utf_option.upper() == 'S' else 'utf-8-sig'
-
-            # Escolha do separador
-            separator_option = input("Escolha o separador desejado (',' para vírgula, '.' para ponto, ';' para ponto e vírgula): ")
-            if separator_option == ',':
-                sep_option = ','
-            elif separator_option == '.':
-                sep_option = '.'
-            elif separator_option == ';':
-                sep_option = ';'
-            else:
-                print("Opção inválida. Usando vírgula como separador.")
-                sep_option = ','
 
             base_name = os.path.splitext(os.path.basename(xlsx_file))[0]
             csv_file = os.path.join(output_folder, f"{base_name}.csv")
