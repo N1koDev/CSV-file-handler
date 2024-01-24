@@ -35,6 +35,10 @@ def convert_xlsx_to_csv(input_folder, output_folder):
         try:
             df = pd.read_excel(xlsx_file)
 
+            # Identificar colunas numéricas e converter para float64
+            for col in df.select_dtypes(include=['float']).columns:
+                df[col] = df[col].astype('float64')
+
             base_name = os.path.splitext(os.path.basename(xlsx_file))[0]
             csv_file = os.path.join(output_folder, f"{base_name}.csv")
             df.to_csv(csv_file, index=False, encoding=encoding_option, sep=sep_option)
